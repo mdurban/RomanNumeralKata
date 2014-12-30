@@ -20,17 +20,17 @@ public class RomanNumeralConverter {
 
     public static String convertArabicToRoman(int arabic) {
         StringBuilder sb = new StringBuilder();
-        int iterableArabic = arabic;
+        final int [] currentValue = new int[] { arabic };
 
-        for (int key : map.descendingKeySet()) {
-            int currentValue =  iterableArabic / key;
+        map.descendingKeySet().forEach((key) -> {
+            int multipleOfKey = currentValue[0] / key;
 
-            for (int i = 0; i < currentValue; i++) {
+            for (int i = 0; i < multipleOfKey; i++) {
                 sb.append(map.get(key));
             }
 
-            iterableArabic %= key;
-        }
+            currentValue[0] %= key;
+        });
 
         return sb.toString();
     }
