@@ -39,14 +39,22 @@ class RomanNumeralConverterSpec extends Specification {
         expected | input
         1        | "I"
         2        | "II"
+        3        | "III"
         4        | "IV"
         5        | "V"
+        8        | "VIII"
+        9        | "IX"
         10       | "X"
         15       | "XV"
         50       | "L"
+        75       | "LXXV"
+        85       | "LXXXV"
+        99       | "XCIX"
         100      | "C"
         500      | "D"
+        999      | "CMXCIX"
         1000     | "M"
+        3000     | "MMM"
     }
 
 }
