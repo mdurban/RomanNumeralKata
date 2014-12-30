@@ -4,7 +4,7 @@ import spock.lang.Unroll
 class RomanNumeralConverterSpec extends Specification {
 
     @Unroll
-    def "should convert #input to #expected properly"() {
+    def "arabic to roman should convert #input to #expected properly"() {
         expect:
         expected == RomanNumeralConverter.convertArabicToRoman(input)
 
@@ -27,7 +27,6 @@ class RomanNumeralConverterSpec extends Specification {
         "CMXCIX" | 999
         "M"      | 1000
         "MMM"    | 3000
-        "MMMDCCCXCIX" | 3899
     }
 
 }

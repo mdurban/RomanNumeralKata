@@ -1,12 +1,10 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.SortedMap;
+import java.util.Collections;
 import java.util.TreeMap;
 
 public class RomanNumeralConverter {
 
     private static final TreeMap<Integer, String> map;
-    private static final TreeMap<Integer, String> cheatersMap;
+    private static final TreeMap<Integer, String> specialCaseMap;
 
     static {
         map = new TreeMap<>();
@@ -18,7 +16,7 @@ public class RomanNumeralConverter {
         map.put(5, "V");
         map.put(1, "I");
 
-        cheatersMap = new TreeMap<>();
+        specialCaseMap = new TreeMap<>();
         map.put(4, "IV");
         map.put(9, "IX");
         map.put(40, "XL");
@@ -31,18 +29,18 @@ public class RomanNumeralConverter {
         StringBuilder sb = new StringBuilder();
         final int [] currentValue = new int[] { arabic };
 
-        map.descendingKeySet().forEach((key) -> {
-            int multipleOfKey = currentValue[0] / key;
+        map.descendingKeySet().forEach((mapKey) -> {
+            int timesKeyIsFound = currentValue[0] / mapKey;
 
-            for (int i = 0; i < multipleOfKey; i++) {
-                sb.append(map.get(key));
-
-                if (multipleOfKey > 3) {
-                    sb.replace(0, sb.length(), cheatersMap.get(arabic));
+            if (specialCaseMap.containsKey(arabic)) {
+                sb.append(specialCaseMap.get(arabic));
+            } else {
+                for (int i = 0; i < timesKeyIsFound; i++) {
+                    sb.append(map.get(mapKey));
                 }
             }
 
-            currentValue[0] %= key;
+            currentValue[0] %= mapKey;
         });
 
         return sb.toString();
