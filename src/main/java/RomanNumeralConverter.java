@@ -1,8 +1,10 @@
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class RomanNumeralConverter {
 
     private static final TreeMap<Integer, String> map;
+    private static final HashMap<String, Integer> valueMap;
 
     static {
         map = new TreeMap<>();
@@ -20,6 +22,14 @@ public class RomanNumeralConverter {
         map.put(900, "CM");
         map.put(1000, "M");
 
+        valueMap = new HashMap<>();
+        valueMap.put("I", 1);
+        valueMap.put("V", 5);
+        valueMap.put("X", 10);
+        valueMap.put("L", 50);
+        valueMap.put("C", 100);
+        valueMap.put("D", 500);
+        valueMap.put("M", 1000);
     }
 
     public static String convertArabicToRoman(int arabic) {
@@ -40,6 +50,18 @@ public class RomanNumeralConverter {
     }
 
     public static int convertRomanToArabic(String roman) {
-        return 1;
+        int returnVal = 0;
+
+        for (int i = 0; i < roman.length(); i++) {
+            String currentThingy = roman.substring(i, i + 1);
+
+            if (i < roman.length() - 1 && valueMap.get(currentThingy) < valueMap.get(roman.substring(i + 1, i + 2))){
+                returnVal += valueMap.get(roman.substring(++i, i + 1)) - valueMap.get(currentThingy);
+            } else {
+                returnVal += valueMap.get(currentThingy);
+            }
+        }
+
+        return returnVal;
     }
 }
