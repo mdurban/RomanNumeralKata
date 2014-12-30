@@ -53,15 +53,25 @@ public class RomanNumeralConverter {
         int returnVal = 0;
 
         for (int i = 0; i < roman.length(); i++) {
-            String currentThingy = roman.substring(i, i + 1);
+            int currentDigit = getValueFromMap(roman, i);
+            int nextDigit = 0;
 
-            if (i < roman.length() - 1 && valueMap.get(currentThingy) < valueMap.get(roman.substring(i + 1, i + 2))){
-                returnVal += valueMap.get(roman.substring(++i, i + 1)) - valueMap.get(currentThingy);
+            if(i < (roman.length() - 1)) {
+                nextDigit = getValueFromMap(roman, i + 1);
+            }
+
+            if (currentDigit < nextDigit) {
+                returnVal += nextDigit - currentDigit;
+                i++;
             } else {
-                returnVal += valueMap.get(currentThingy);
+                returnVal += currentDigit;
             }
         }
 
         return returnVal;
+    }
+
+    private static Integer getValueFromMap(String roman, int i) {
+        return valueMap.get(roman.substring(i, i + 1));
     }
 }
