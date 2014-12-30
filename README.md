@@ -1,4 +1,4 @@
-skeleton
-========
+Roman Numeral Kata
 
-Generic skeleton for Java/Groovy
+See below:
+http://agilekatas.co.uk/katas/romannumerals-kata.html
