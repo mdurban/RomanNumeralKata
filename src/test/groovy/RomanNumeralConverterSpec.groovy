@@ -15,6 +15,7 @@ class RomanNumeralConverterSpec extends Specification {
         "III"    | 3
         "IV"     | 4
         "V"      | 5
+        "VIII"   | 8
         "IX"     | 9
         "X"      | 10
         "XV"     | 15
@@ -27,6 +28,17 @@ class RomanNumeralConverterSpec extends Specification {
         "CMXCIX" | 999
         "M"      | 1000
         "MMM"    | 3000
+    }
+
+    @Unroll
+    def "roman to arabic should convert #input to #expected properly"() {
+        expect:
+        expected == RomanNumeralConverter.convertRomanToArabic(input)
+
+        where:
+        expected | input
+        1        | "I"
+//        5        | "V"
     }
 
 }
